@@ -1,5 +1,6 @@
-node_modules
-.next
+node_modules/
+.next/
+dist/
+build/
+coverage/
 .env
-dist
-build

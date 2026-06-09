@@ -35,7 +35,18 @@ export type EducationItem = {
 export type SkillItem = {
   name: string;
   icon: string;
+  emoji: string;
   description: LocalizedText;
+};
+
+export type ProjectMedia = {
+  type: 'image' | 'video';
+  url: string;
+  alt?: string;
+};
+
+export type ProjectCardExtended = ProjectCard & {
+  media?: ProjectMedia;
 };
 
 export const heroCopy: Record<Lang, { eyebrow: string; headline: string; role: string; intro: string; shortPitch: string; primaryCta: string; downloadEs: string; downloadEn: string; github: string; linkedin: string; indeed: string }> = {
@@ -108,7 +119,8 @@ export const stats: Array<{ value: string; label: LocalizedText }> = [
 export const skillStack: SkillItem[] = [
   {
     name: 'React / Next.js',
-    icon: 'R',
+    icon: '⚛️',
+    emoji: '⚛️',
     description: {
       es: 'Interfaces modernas, componentes reutilizables y experiencias rápidas.',
       en: 'Modern interfaces, reusable components, and fast user experiences.'
@@ -116,7 +128,8 @@ export const skillStack: SkillItem[] = [
   },
   {
     name: 'Node.js',
-    icon: 'N',
+    icon: '🟢',
+    emoji: '🟢',
     description: {
       es: 'Servicios y lógica de backend en JavaScript.',
       en: 'Backend services and business logic in JavaScript.'
@@ -124,23 +137,35 @@ export const skillStack: SkillItem[] = [
   },
   {
     name: 'PHP',
-    icon: 'P',
+    icon: '🐘',
+    emoji: '🐘',
     description: {
       es: 'Aplicaciones funcionales y mantenimiento de sistemas existentes.',
       en: 'Functional applications and maintenance of existing systems.'
     }
   },
   {
-    name: 'MySQL',
-    icon: 'DB',
+    name: 'MySQL / MariaDB',
+    icon: '🗄️',
+    emoji: '🗄️',
     description: {
       es: 'Modelado relacional, consultas y administración de datos.',
       en: 'Relational modeling, queries, and data management.'
     }
   },
   {
+    name: 'Python',
+    icon: '🐍',
+    emoji: '🐍',
+    description: {
+      es: 'Análisis de datos, machine learning y scripting.',
+      en: 'Data analysis, machine learning, and scripting.'
+    }
+  },
+  {
     name: 'Docker',
-    icon: 'D',
+    icon: '🐳',
+    emoji: '🐳',
     description: {
       es: 'Entornos reproducibles y despliegues consistentes.',
       en: 'Reproducible environments and consistent deployments.'
@@ -148,15 +173,25 @@ export const skillStack: SkillItem[] = [
   },
   {
     name: 'Git / Linux',
-    icon: 'G',
+    icon: '🔧',
+    emoji: '🔧',
     description: {
-      es: 'Flujo de trabajo técnico, control de versiones y terminal.',
-      en: 'Technical workflow, version control, and terminal work.'
+      es: 'Control de versiones, terminal y flujo de trabajo técnico.',
+      en: 'Version control, terminal, and technical workflow.'
+    }
+  },
+  {
+    name: 'JavaScript / TypeScript',
+    icon: '✨',
+    emoji: '✨',
+    description: {
+      es: 'Lenguajes core para frontend y backend moderno.',
+      en: 'Core languages for modern frontend and backend.'
     }
   }
 ];
 
-export const projects: ProjectCard[] = [
+export const projects: ProjectCardExtended[] = [
   {
     title: {
       es: 'Sistema de Gestión Operativa — Cactus Tours',
@@ -182,6 +217,39 @@ export const projects: ProjectCard[] = [
     tags: ['JavaScript', 'PHP', 'MySQL', 'Full Stack'],
     accent: 'linear-gradient(135deg, #2b5d49, #173026)',
     links: []
+  },
+  {
+    title: {
+      es: 'BUAP - Pagina para Hackaton OQI',
+      en: 'BUAP - Page for OQI Hackathon'
+    },
+    category: { es: 'Laboral', en: 'Laboral' },
+    summary: {
+      es: 'Pagina web para la universidad BUAP, creada para el Hackaton OQI, con información relevante y diseño atractivo.',
+      en: 'Web page for BUAP university, created for the OQI Hackathon, with relevant information and attractive design.'
+    },
+    bullets: {
+      es: [
+        'Desarrollo de interfaces con Angular.',
+        'Desarrollo de backend con node.js.',
+        'Diseño y mantenimiento de bases de datos.',
+        'Mantenimiento y actualización de la página web durante el evento.'
+      ],
+      en: [
+        'Built accessible interfaces with Angular.',
+        'Developed backend with node.js.',
+        'Designed and maintained databases.',
+        'Maintained and updated the website during the event.'
+      ]
+    },
+    tags: ['Angular', 'node.js', 'Databases', 'Full Stack'],
+    accent: 'linear-gradient(135deg, #2b5d49, #173026)',
+    links: [
+      {
+        label: { es: 'Página Web', en: 'Web Page' },
+        href: 'https://oqi-hackaton.buap.mx1'
+      }
+    ]
   },
   {
     title: {
@@ -211,6 +279,41 @@ export const projects: ProjectCard[] = [
       {
         label: { es: 'GitHub', en: 'GitHub' },
         href: 'https://github.com/EEBySE/Elecciones'
+      }
+    ]
+  },
+  {
+    title: {
+      es: 'Asignacion de horarios con optimizacion de grafos',
+      en: 'Schedule Assignment with Graph Optimization'
+    },
+    category: { es: 'Investigación', en: 'Research' },
+    summary: {
+      es: 'Sistema basado en grafos para la asignación inteligente de horarios.',
+      en: 'Graph-based system for intelligent schedule assignment.'
+    },
+    bullets: {
+      es: [
+        'Diseño de una interfaz de modelado de problemas de asignación de horarios.',
+        'Implementación de algoritmos de optimización de grafos para resolver problemas de asignación.',
+        'Desarrollo de un artículo académico para presentar los resultados y el enfoque técnico.'
+      ],
+      en: [
+        'Designed an interface for modeling scheduling assignment problems.',
+        'Implemented graph optimization algorithms to solve assignment problems.',
+        'Developed an academic paper to present the results and technical approach.'
+      ]
+    },
+    tags: ['Python', 'Graph Theory', 'Optimization', 'Algorithms'],
+    accent: 'linear-gradient(135deg, #23384c, #0f1b25)',
+    links: [
+      {
+        label: { es: 'GitHub', en: 'GitHub' },
+        href: 'https://github.com/Aldohdezco/AsignacionHorariosAdmision2026'
+      },
+      {
+        label: { es: 'Artículo', en: 'Paper' },
+        href: 'https://www.overleaf.com/read/mmzdmjgrkybt#a4f9cf'
       }
     ]
   },
@@ -353,6 +456,11 @@ export const references: Array<{ name: string; org: string; phone: string }> = [
     name: 'Dra. Darnes Vilariño Ayala',
     org: 'Facultad de Ciencias de la Computación - BUAP',
     phone: '221 184 6636'
+  },
+    {
+    name: 'M.I. Luis Enrrique Morales Aguilar',
+    org: 'Facultad de Ciencias de la Computación - BUAP',
+    phone: '55 8534 3345'
   }
 ];
 
@@ -363,4 +471,44 @@ export const contact = {
   github: 'https://github.com/Aldohdezco',
   linkedin: 'https://www.linkedin.com/in/aldohdezco',
   indeed: 'https://mx.indeed.com/'
+};
+
+export const terminalWelcome: Record<Lang, string> = {
+  es: 'Escribe "help" para ver los comandos disponibles.',
+  en: 'Type "help" to see the available commands.'
+};
+
+export const terminalCommands: Record<string, Record<Lang, string>> = {
+  help: {
+    es: 'Comandos disponibles:\n> projects\n> skills\n> about\n> contact\n> experience\n> references\n> clear',
+    en: 'Available commands:\n> projects\n> skills\n> about\n> contact\n> experience\n> references\n> clear'
+  },
+  projects: {
+    es: 'Proyectos destacados — Baja para ver más',
+    en: 'Featured projects — Scroll to see more'
+  },
+  skills: {
+    es: 'Stack: React, Next.js, Node.js, Python, PHP, MySQL, Docker, Git, TypeScript',
+    en: 'Stack: React, Next.js, Node.js, Python, PHP, MySQL, Docker, Git, TypeScript'
+  },
+  about: {
+    es: 'Egresado en Ciencias de la Computación, desarrollador full stack con enfoque en producto y ejecución.',
+    en: 'Computer Science graduate, full-stack developer focused on product and execution.'
+  },
+  contact: {
+    es: 'Email: aldohdezco@gmail.com | Tel: 762 128 4898 | Ubicación: Puebla, Puebla',
+    en: 'Email: aldohdezco@gmail.com | Phone: 762 128 4898 | Location: Puebla, Puebla'
+  },
+  experience: {
+    es: '2025 - Cactus Tours (Full Stack Developer) | 2024 - PLAMI (Software Developer)',
+    en: '2025 - Cactus Tours (Full Stack Developer) | 2024 - PLAMI (Software Developer)'
+  },
+  references: {
+    es: 'Disponibles en la sección de Referencias',
+    en: 'Available in the References section'
+  },
+  clear: {
+    es: 'Terminal limpia',
+    en: 'Terminal cleared'
+  }
 };
