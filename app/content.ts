@@ -91,12 +91,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     label: { es: 'LinkedIn', en: 'LinkedIn' },
-    href: 'https://www.linkedin.com/in/aldohdezco',
-    external: true
-  },
-  {
-    label: { es: 'Indeed', en: 'Indeed' },
-    href: 'https://mx.indeed.com/',
+    href: 'https://www.linkedin.com/in/hernandez-cordova-aldo-9b2985282/',
     external: true
   }
 ];

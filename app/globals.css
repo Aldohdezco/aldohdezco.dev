@@ -21,11 +21,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at top left, rgba(91, 192, 141, 0.18), transparent 25%),
     radial-gradient(circle at top right, rgba(155, 211, 191, 0.12), transparent 30%),
@@ -109,6 +111,7 @@ a:hover {
   margin: 0;
   padding: 0;
   gap: 28px;
+  min-width: 0;
 }
 
 .navbar-menu li a {
@@ -137,6 +140,43 @@ a:hover {
 
 .navbar-menu li a:hover::after {
   width: 100%;
+}
+
+.navbar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  padding: 0;
+  place-items: center;
+}
+
+.navbar-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-toggle.active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 @keyframes slideDown {
@@ -255,9 +295,9 @@ a:hover {
 
 .hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  padding: 28px;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+  gap: clamp(24px, 5vw, 48px);
+  padding: clamp(18px, 3vw, 28px);
   background: linear-gradient(180deg, rgba(17, 27, 24, 0.95), rgba(10, 16, 14, 0.92));
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) + 8px);
@@ -279,8 +319,9 @@ a:hover {
 
 .avatar-container {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: min(320px, 100%);
+  aspect-ratio: 1;
+  height: auto;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
@@ -295,9 +336,10 @@ a:hover {
 
 .hero-copy h1 {
   margin: 0;
-  font-size: clamp(3rem, 7vw, 5.8rem);
-  line-height: 0.92;
-  letter-spacing: -0.06em;
+  font-size: clamp(2.55rem, 7vw, 5.8rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .eyebrow,
@@ -364,12 +406,16 @@ a:hover {
 .project-links a,
 .cv-button,
 .cv-backlink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 12px 18px;
   font-weight: 700;
   letter-spacing: 0.02em;
   background: rgba(255, 255, 255, 0.02);
+  text-align: center;
 }
 
 .button.primary,
@@ -444,7 +490,7 @@ a:hover {
 
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 14px;
 }
 
@@ -490,7 +536,7 @@ a:hover {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 16px;
 }
 
@@ -670,7 +716,7 @@ a:hover {
 
 .references-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 14px;
 }
 
@@ -746,7 +792,7 @@ a:hover {
 
 .education-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 14px;
 }
 
@@ -769,7 +815,7 @@ a:hover {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 14px;
 }
 
@@ -792,6 +838,7 @@ a:hover {
 
 .contact-card strong {
   font-size: 1rem;
+  overflow-wrap: anywhere;
 }
 
 .footer-note {
@@ -825,7 +872,7 @@ a:hover {
 
 .cv-header {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
   gap: 20px;
   padding: 24px;
   border-radius: calc(var(--radius) - 4px);
@@ -855,11 +902,12 @@ a:hover {
 .cv-contact-block span {
   display: block;
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .cv-layout {
   display: grid;
-  grid-template-columns: 1.5fr 0.9fr;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
   gap: 18px;
   margin-top: 18px;
 }
@@ -939,21 +987,10 @@ a:hover {
   .hero,
   .cv-header,
   .cv-layout,
-  .project-grid,
-  .education-list,
-  .contact-grid,
-  .skill-grid,
-  .references-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .references-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .timeline-item {
     grid-template-columns: 1fr;
   }
+
 
   .section-heading {
     align-items: flex-start;
@@ -964,14 +1001,15 @@ a:hover {
 @media (max-width: 720px) {
   .site-shell,
   .cv-page {
-    width: calc(100% - 18px);
+    width: calc(100% - 24px);
     margin: 12px auto 24px;
   }
 
   .hero,
   .section,
   .cv-page {
-    padding: 18px;
+    padding: 16px;
+    border-radius: 20px;
   }
 
   .topbar,
@@ -987,36 +1025,167 @@ a:hover {
     gap: 10px;
   }
 
-  .stats-grid {
-    grid-template-columns: 1fr;
+  .cta-row,
+  .social-row,
+  .cv-actions {
+    width: 100%;
+  }
+
+  .button,
+  .social-link,
+  .project-links a,
+  .cv-button,
+  .cv-backlink {
+    flex: 1 1 180px;
+    min-height: 46px;
   }
 
   .hero-copy h1 {
-    font-size: clamp(2.5rem, 18vw, 4rem);
+    font-size: clamp(2.35rem, 16vw, 3.7rem);
+  }
+
+  .navbar-container {
+    width: calc(100% - 24px);
+    gap: 16px;
+    padding: 10px 0;
+    position: relative;
+  }
+
+  .navbar-brand {
+    flex: 0 0 auto;
+  }
+
+  .navbar-toggle {
+    display: flex;
+    margin-left: auto;
   }
 
   .navbar-menu {
-    gap: 16px;
-    font-size: 0.85rem;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    display: grid;
+    gap: 4px;
+    padding: 10px;
+    background: rgba(7, 17, 15, 0.97);
+    border: 1px solid var(--line-strong);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .navbar-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .navbar-menu li a {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.92rem;
+  }
+
+  .navbar-menu li a:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .navbar-menu li a::after {
+    display: none;
   }
 
   .hero {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 22px;
   }
 
   .avatar-container {
-    width: 240px;
-    height: 240px;
-  }
-
-  .references-grid {
-    grid-template-columns: 1fr 1fr;
+    width: min(240px, 100%);
   }
 
   .terminal-body {
     max-height: 300px;
     min-height: 150px;
+    padding: 12px;
+  }
+
+  .terminal-header {
+    padding: 10px 12px;
+  }
+
+  .terminal-line {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .terminal-line.input-active {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .terminal-input {
+    width: 100%;
+  }
+
+  .cv-header,
+  .cv-block,
+  .cv-skill-item {
+    padding: 14px;
+  }
+
+  .cv-block-header {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-note {
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-shell,
+  .cv-page,
+  .navbar-container {
+    width: calc(100% - 16px);
+  }
+
+  .hero,
+  .section,
+  .cv-page {
+    padding: 14px;
+  }
+
+  .brand {
+    font-size: 0.9rem;
+  }
+
+  .brand-subtitle,
+  .hero-role,
+  .section-copy,
+  .hero-intro {
+    font-size: 0.98rem;
+  }
+
+  .skill-card,
+  .cv-skill-item {
+    flex-direction: column;
+  }
+
+  .language-switch,
+  .language-chip {
+    width: 100%;
+  }
+
+  .topbar-actions {
+    width: 100%;
   }
 }
 

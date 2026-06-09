@@ -22,6 +22,11 @@ const languageTabs: Array<{ id: Lang; label: string }> = [
   { id: 'en', label: 'EN' }
 ];
 
+const cvDocs = {
+  es: '/docs/CV%20%E2%80%93%20Aldo%20Hern%C3%A1ndez%20C%C3%B3rdova%20-%20ESP.pdf',
+  en: '/docs/CV%20-%20Aldo%20Hernandez%20Cordova%20-%20ENG.pdf'
+};
+
 export function PortfolioPage() {
   const [lang, setLang] = useState<Lang>('es');
   const copy = heroCopy[lang];
@@ -77,10 +82,10 @@ export function PortfolioPage() {
               <a className="button primary" href="#proyectos">
                 {copy.primaryCta}
               </a>
-              <a className="button secondary" href="/cv/es/download">
+              <a className="button secondary" href={cvDocs.es} target="_blank" rel="noreferrer">
                 {copy.downloadEs}
               </a>
-              <a className="button secondary" href="/cv/en/download">
+              <a className="button secondary" href={cvDocs.en} target="_blank" rel="noreferrer">
                 {copy.downloadEn}
               </a>
             </div>

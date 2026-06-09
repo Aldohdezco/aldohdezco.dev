@@ -1,5 +1,3 @@
-import { renderToStaticMarkup } from 'react-dom/server';
-import { createElement } from 'react';
 import { CvDocument } from '@/components/CvDocument';
 import type { Lang } from '@/app/content';
 
@@ -46,6 +44,10 @@ export async function GET(_request: Request, { params }: { params: Promise<{ lan
     return new Response('Not found', { status: 404 });
   }
 
+  const [{ renderToStaticMarkup }, { createElement }] = await Promise.all([
+    import('react-dom/server'),
+    import('react')
+  ]);
   const body = renderToStaticMarkup(createElement(CvDocument, { lang, downloadMode: true }));
   const html = buildHtml(lang, body);
   const filename = lang === 'es'
